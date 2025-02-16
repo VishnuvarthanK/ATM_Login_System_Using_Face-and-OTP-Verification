@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATM User Account</title>
+    <link rel="stylesheet" href="Dashboard.css">
+
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome, <span id="username">User</span></h1>
+        <p class="balance">Account Balance: <strong>$5,000</strong></p>
+        <div class="buttons">
+            <button class="button withdraw" onclick="withdrawMoney()">Withdraw</button>
+            <button class="button deposit" onclick="depositMoney()">Deposit</button>
+        </div>
+        <p id="status"></p>
+        <a href="index.html" class="button logout">Logout</a>
+    </div>
+
+    <script>
+        function withdrawMoney() {
+            document.getElementById("status").innerText = "Withdrawal Successful!";
+        }
+        function depositMoney() {
+            document.getElementById("status").innerText = "Deposit Successful!";
+        }
+    </script>
+</body>
+</html>

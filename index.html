@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>OTP & Face Recognition Login</title>
+    <script>
+        async function sendOtp() {
+            const cardNumber = document.getElementById("card_number").value;
+            if (!cardNumber) {
+                alert("Please enter your card number");
+                return;
+            }
+            const response = await fetch("http://localhost:8000/send_otp", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ card_number: cardNumber })
+            });
+            const result = await response.json();
+            alert(result.message);
+        }
+
+        async function verifyOtp() {
+            const otp = document.getElementById("otp").value;
+            const response = await fetch("http://localhost:8000/verify_otp", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ otp: otp })
+            });
+            const result = await response.json();
+            alert(result.message);
+            if (result.redirect) {
+                window.location.href = result.redirect;
+            }
+        }
+
+        async function startFaceRecognition() {
+            document.getElementById("status").innerText = "Starting face recognition...";
+            fetch("http://localhost:8000/run-detectface") // Correct Flask route
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("status").innerText = data.success || data.error || "Unknown response";
+                })
+                .catch(error => {
+                    document.getElementById("status").innerText = "Error: Unable to start face recognition";
+                });
+        }
+    </script>
+</head>
+<body>
+    <h2>OTP & Face Recognition Login</h2>
+    <div>
+        <label>Card Number:</label>
+        <input type="text" id="card_number" placeholder="Enter your card number">
+        <button onclick="sendOtp()">Send OTP</button>
+    </div>
+    <br>
+    <div>
+        <label>Enter OTP:</label>
+        <input type="text" id="otp" placeholder="Enter OTP">
+        <button onclick="verifyOtp()">Verify OTP</button>
+    </div>
+    <br>
+    <div>
+        <button onclick="startFaceRecognition()">Start Face Recognition</button>
+    </div>
+    <br>
+    <div id="status"></div>
+</body>
+</html>
