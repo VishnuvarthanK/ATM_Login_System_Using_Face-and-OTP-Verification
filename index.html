@@ -49,23 +49,24 @@
     </script>
 </head>
 <body>
-    <h2>OTP & Face Recognition Login</h2>
+    <h2>ATM LOGIN SYSTEM</h2>
     <div>
-        <label>Card Number:</label>
-        <input type="text" id="card_number" placeholder="Enter your card number">
+        <label>ACCOUNT NUMBER LOGIN</label>   
+        <input type="text" id="otp" placeholder="Enter Account Number">
+        <button>Login</button>
+    </div>
+    <div>
+        <label>OTP LOGIN</label>
+        <input type="text" id="card_number" placeholder="Enter your Phone number">
         <button onclick="sendOtp()">Send OTP</button>
-    </div>
-    <br>
-    <div>
-        <label>Enter OTP:</label>
+   
+        <br><br>
         <input type="text" id="otp" placeholder="Enter OTP">
-        <button onclick="verifyOtp()">Verify OTP</button>
+        <button onclick="verifyOtp()">Verify OTP and Login</button>
     </div>
-    <br>
     <div>
-        <button onclick="startFaceRecognition()">Start Face Recognition</button>
+        <label>FACE LOGIN</label>
+        <button onclick="startFaceRecognition()">Verify and Login</button>
     </div>
-    <br>
-    <div id="status"></div>
 </body>
 </html>
